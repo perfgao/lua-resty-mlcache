@@ -38,11 +38,20 @@ jobs:
         run: echo "OPENRESTY_VER=${{ github.event.inputs.openresty }}" >> $GITHUB_ENV
       - if:  ${{ github.event_name == 'push' || github.event_name == 'pull_request' }}
         run: echo "OPENRESTY_VER=${{ matrix.openresty }}" >> $GITHUB_ENV
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get --yes update
+          sudo apt-get remove nginx-core nginx-full nginx-light nginx-extras
+          sudo apt-get remove libgd3
+          sudo apt-get install --yes build-essential zlib1g-dev libpcre3 libpcre3-dev libssl-dev libxslt1-dev libxml2-dev libgeoip-dev libgd-dev libperl-dev
+
       - uses: actions/checkout@v2
       - name: Setup OpenResty
         uses: thibaultcha/setup-openresty@main
         with:
           version: ${{ env.OPENRESTY_VER }}
+          opt: --with-pcre --with-pcre-jit
       - run: prove -r t/
 
       - name: Setup tmate session
