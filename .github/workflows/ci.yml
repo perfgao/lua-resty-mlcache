@@ -27,12 +27,12 @@ jobs:
         openresty:
           - 1.25.3.1
           - 1.21.4.3
-          # - 1.19.9.1
-          # - 1.19.3.2
-          # - 1.17.8.2
-          # - 1.15.8.3
-          # - 1.13.6.2
-          # - 1.11.2.5
+          - 1.19.9.1
+          - 1.19.3.2
+          - 1.17.8.2
+          - 1.15.8.3
+          - 1.13.6.2
+          - 1.11.2.5
     steps:
       - if:  ${{ github.event_name == 'workflow_dispatch' }}
         run: echo "OPENRESTY_VER=${{ github.event.inputs.openresty }}" >> $GITHUB_ENV
