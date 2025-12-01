@@ -51,7 +51,7 @@ jobs:
         uses: thibaultcha/setup-openresty@main
         with:
           version: ${{ env.OPENRESTY_VER }}
-          opt: --with-pcre --with-pcre-jit --with-http_rewrite_module
+          opt: --with-pcre --with-pcre-jit
       - run: prove -r t/
 
       - name: Setup tmate session
