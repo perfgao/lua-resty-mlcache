@@ -480,7 +480,9 @@ qr/\[ipc\] no event data at index '1', retrying in: 0\.001s
     }
 --- config
     location /t {
-        #return 200;
+        access_by_lua_block {
+            ngx.exit(ngx.HTTP_OK)
+        }
 
         log_by_lua_block {
             assert(ipc:broadcast("my_channel", "msg 1"))
